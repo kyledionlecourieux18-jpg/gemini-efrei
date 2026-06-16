@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === Logo-matched palette === */
+    /* Logo blue (SPEAK) → #5762D5  →  HSL 235 60% 59% */
+    --primary: 235 60% 59%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 235 80% 95%;
+
+    /* Logo orange (UP) → #F5821F  →  HSL 28 91% 54% */
+    --accent: 28 91% 54%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 28 100% 94%;
+
+    /* Warm cream background — welcoming, not clinical */
+    --background: 36 60% 97%;
+    --foreground: 240 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 25% 12%;
+
+    --secondary: 35 40% 92%;
+    --secondary-foreground: 240 20% 30%;
+
+    --muted: 35 30% 88%;
+    --muted-foreground: 240 10% 48%;
+
+    --border: 35 25% 85%;
+    --radius: 16px;
+
+    --hero-gradient: linear-gradient(
+      155deg,
+      hsl(235 80% 97%) 0%,
+      hsl(36 60% 97%) 45%,
+      hsl(28 90% 96%) 100%
+    );
+  }
+}
+
+@layer components {
+  /* Warm glass card */
+  .glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 32px rgba(87, 98, 213, 0.07);
+  }
+
+  /* Gradient button base */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-base font-bold text-white transition-all active:scale-[0.97];
+    background: linear-gradient(135deg, hsl(235 60% 59%), hsl(28 91% 54%));
+    box-shadow: 0 4px 20px rgba(87, 98, 213, 0.35);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 6px 28px rgba(87, 98, 213, 0.45);
+    transform: translateY(-1px);
+  }
+
+  /* Typing dots */
+  .dot {
+    @apply inline-block h-2 w-2 rounded-full;
+    background: hsl(235 60% 59%);
+    animation: bounceDot 1.2s ease-in-out infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  /* Chat bubble variants */
+  .bubble-bot {
+    @apply rounded-2xl rounded-bl-md border border-border bg-white px-4 py-3 text-sm leading-relaxed text-foreground shadow-sm;
+  }
+
+  .bubble-user {
+    @apply rounded-2xl rounded-br-md px-4 py-3 text-sm leading-relaxed text-white;
+    background: linear-gradient(135deg, hsl(235 60% 59%), hsl(245 65% 65%));
+    box-shadow: 0 2px 12px rgba(87, 98, 213, 0.25);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(235 60% 55%), hsl(28 91% 54%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-gradient {
+    border-image: linear-gradient(135deg, hsl(235 60% 59%), hsl(28 91% 54%)) 1;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(235 40% 82%);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(235 50% 72%);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
