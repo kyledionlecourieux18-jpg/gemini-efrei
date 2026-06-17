@@ -11,77 +11,67 @@
       height: 1080px;
       font-family: 'Inter', sans-serif;
       overflow: hidden;
-      background: linear-gradient(160deg, #2A2563 0%, #3D3899 30%, #5762D5 55%, #E87A20 85%, #F5A623 100%);
+      background: linear-gradient(170deg, #FFFFFF 0%, #F5F0FF 35%, #EDE4FF 60%, #E0D4F7 100%);
       position: relative;
     }
 
-    /* Glow effects */
+    /* Soft decorative blobs */
     .glow-1 {
       position: absolute;
-      width: 700px;
-      height: 700px;
+      width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,130,31,0.25) 0%, transparent 65%);
-      bottom: -200px;
-      right: -150px;
+      background: radial-gradient(circle, rgba(155,48,255,0.08) 0%, transparent 65%);
+      top: -150px; right: -100px;
     }
     .glow-2 {
       position: absolute;
-      width: 500px;
-      height: 500px;
+      width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(87,98,213,0.3) 0%, transparent 65%);
-      top: -100px;
-      left: -80px;
+      background: radial-gradient(circle, rgba(139,0,204,0.06) 0%, transparent 65%);
+      bottom: -100px; left: -80px;
     }
     .glow-3 {
       position: absolute;
-      width: 400px;
-      height: 400px;
+      width: 350px; height: 350px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
-      top: 350px;
-      left: 300px;
+      background: radial-gradient(circle, rgba(200,160,255,0.12) 0%, transparent 65%);
+      top: 400px; left: 150px;
     }
 
     /* Floating speech bubbles */
     .bubble {
       position: absolute;
-      background: rgba(255,255,255,0.08);
-      border: 2px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      backdrop-filter: blur(4px);
+      background: rgba(155,48,255,0.04);
+      border: 2px solid rgba(155,48,255,0.1);
+      border-radius: 18px;
     }
     .bubble::after {
       content: '';
       position: absolute;
-      bottom: -10px;
-      width: 16px;
-      height: 16px;
-      background: rgba(255,255,255,0.08);
-      border-right: 2px solid rgba(255,255,255,0.12);
-      border-bottom: 2px solid rgba(255,255,255,0.12);
+      bottom: -9px;
+      width: 14px; height: 14px;
+      background: rgba(155,48,255,0.04);
+      border-right: 2px solid rgba(155,48,255,0.1);
+      border-bottom: 2px solid rgba(155,48,255,0.1);
       transform: rotate(45deg);
     }
-    .b1 { width: 100px; height: 65px; top: 80px; right: 80px; transform: rotate(8deg); }
-    .b1::after { left: 20px; }
-    .b2 { width: 80px; height: 55px; top: 200px; left: 50px; transform: rotate(-5deg); }
-    .b2::after { right: 15px; }
-    .b3 { width: 70px; height: 48px; bottom: 250px; right: 50px; transform: rotate(4deg); }
-    .b3::after { left: 15px; }
-    .b4 { width: 60px; height: 42px; bottom: 350px; left: 80px; transform: rotate(-8deg); border-color: rgba(245,130,31,0.2); background: rgba(245,130,31,0.06); }
-    .b4::after { right: 12px; border-color: rgba(245,130,31,0.2); background: rgba(245,130,31,0.06); }
+    .b1 { width: 90px; height: 58px; top: 70px; left: 70px; transform: rotate(-6deg); }
+    .b1::after { right: 18px; }
+    .b2 { width: 75px; height: 50px; top: 160px; right: 60px; transform: rotate(5deg); }
+    .b2::after { left: 14px; }
+    .b3 { width: 65px; height: 44px; bottom: 220px; left: 55px; transform: rotate(-4deg); }
+    .b3::after { right: 12px; }
 
-    /* Floating emojis */
-    .emoji {
+    /* Small floating hearts */
+    .heart {
       position: absolute;
-      font-size: 44px;
+      font-size: 32px;
       z-index: 1;
+      opacity: 0.6;
     }
-    .e1 { top: 95px; left: 120px; transform: rotate(-12deg); }
-    .e2 { top: 65px; right: 200px; transform: rotate(10deg); font-size: 36px; }
-    .e3 { bottom: 310px; right: 120px; transform: rotate(-5deg); font-size: 38px; }
-    .e4 { bottom: 270px; left: 100px; transform: rotate(15deg); font-size: 32px; }
+    .h1 { top: 85px; right: 160px; transform: rotate(12deg); font-size: 28px; }
+    .h2 { top: 260px; left: 65px; transform: rotate(-8deg); font-size: 24px; }
+    .h3 { bottom: 260px; right: 70px; transform: rotate(6deg); font-size: 26px; }
 
     .container {
       position: relative;
@@ -92,116 +82,112 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 80px;
-      gap: 50px;
+      padding: 70px 80px;
+      gap: 36px;
     }
 
-    /* Logo */
+    /* Mascot SVG */
+    .mascot {
+      width: 280px;
+      height: 300px;
+      filter: drop-shadow(0 8px 24px rgba(139,0,204,0.2));
+    }
+
+    /* Logo text */
     .logo {
       display: flex;
       flex-direction: column;
       align-items: center;
-      line-height: 0.9;
+      line-height: 0.88;
+      margin-top: -10px;
     }
     .logo-speak {
-      font-size: 140px;
+      font-size: 120px;
       font-weight: 900;
-      color: #FFFFFF;
-      letter-spacing: -4px;
+      color: #7B2FBE;
+      letter-spacing: -3px;
       text-transform: uppercase;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.2);
     }
     .logo-up {
-      font-size: 140px;
+      font-size: 120px;
       font-weight: 900;
       color: #F5821F;
-      letter-spacing: -4px;
+      letter-spacing: -3px;
       text-transform: uppercase;
       margin-top: -5px;
-      text-shadow: 0 4px 30px rgba(245,130,31,0.3);
     }
 
     /* Headline */
     .headline {
-      font-size: 46px;
+      font-size: 44px;
       font-weight: 800;
-      color: white;
+      color: #2D1854;
       text-align: center;
       line-height: 1.25;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
     }
 
     /* CTA */
-    .cta {
+    .cta-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
     .cta-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 14px;
-      background: white;
-      color: #5762D5;
+      gap: 12px;
+      background: linear-gradient(135deg, #8B2FC9, #A855F7);
+      color: white;
       font-size: 28px;
       font-weight: 800;
-      padding: 24px 56px;
+      padding: 22px 56px;
       border-radius: 60px;
       border: none;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 28px rgba(139,47,201,0.3);
     }
-
     .cta-btn svg {
-      width: 28px;
-      height: 28px;
-      stroke: #F5821F;
+      width: 26px; height: 26px;
+      stroke: white;
     }
 
     .cta-sub {
       font-size: 18px;
       font-weight: 600;
-      color: rgba(255,255,255,0.7);
+      color: #9B86B5;
       letter-spacing: 0.5px;
     }
 
     /* Bottom bar */
     .bottom-bar {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 40px;
+      gap: 36px;
       padding: 22px 0;
-      background: rgba(0,0,0,0.15);
-      backdrop-filter: blur(12px);
+      background: rgba(139,47,201,0.06);
+      border-top: 1px solid rgba(139,47,201,0.1);
     }
-
     .bottom-item {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: rgba(255,255,255,0.85);
+      color: #7B6A8F;
       font-size: 16px;
       font-weight: 600;
     }
-
     .bottom-item .num {
       font-size: 22px;
       font-weight: 900;
-      color: #F5A623;
+      color: #8B2FC9;
     }
-
     .dot-sep {
-      width: 5px;
-      height: 5px;
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      background: #C8B8DA;
     }
   </style>
 </head>
@@ -214,22 +200,79 @@
   <div class="bubble b1"></div>
   <div class="bubble b2"></div>
   <div class="bubble b3"></div>
-  <div class="bubble b4"></div>
 
-  <div class="emoji e1">💜</div>
-  <div class="emoji e2">🤝</div>
-  <div class="emoji e3">💪</div>
-  <div class="emoji e4">🧡</div>
+  <div class="heart h1">💜</div>
+  <div class="heart h2">💜</div>
+  <div class="heart h3">🧡</div>
 
   <div class="container">
+
+    <!-- Mascot SVG -->
+    <svg class="mascot" viewBox="0 0 500 540" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tail -->
+      <path d="M125 430 C75 415 45 370 65 310 C75 280 85 270 90 268"
+        fill="none" stroke="#1a1a1a" stroke-width="18" stroke-linecap="round"/>
+      <path d="M125 430 C75 415 45 370 65 310 C75 280 85 270 90 268"
+        fill="none" stroke="#9B30FF" stroke-width="12" stroke-linecap="round"/>
+
+      <!-- Body -->
+      <path d="M160 340 C155 440 175 510 250 510 C325 510 345 440 340 340"
+        fill="url(#bodyGrad)" stroke="#1a1a1a" stroke-width="10"/>
+      <path d="M160 340 L160 350 C158 360 165 365 175 360"
+        fill="url(#bodyGrad)" stroke="none"/>
+
+      <!-- Head -->
+      <ellipse cx="250" cy="220" rx="145" ry="140" fill="url(#headGrad)" stroke="#1a1a1a" stroke-width="10"/>
+
+      <!-- Left ear -->
+      <path d="M130 140 L75 55 L175 115" fill="url(#earGrad)" stroke="#1a1a1a" stroke-width="9" stroke-linejoin="round"/>
+
+      <!-- Right ear -->
+      <path d="M370 140 L425 55 L325 115" fill="url(#earGrad)" stroke="#1a1a1a" stroke-width="9" stroke-linejoin="round"/>
+
+      <!-- Left eye -->
+      <ellipse cx="195" cy="210" rx="14" ry="30" fill="#1a1a1a" transform="rotate(-8 195 210)"/>
+
+      <!-- Right eye -->
+      <ellipse cx="305" cy="210" rx="14" ry="30" fill="#1a1a1a" transform="rotate(8 305 210)"/>
+
+      <!-- Nose -->
+      <ellipse cx="250" cy="265" rx="25" ry="20" fill="#6B0DAD" stroke="#1a1a1a" stroke-width="6"/>
+      <!-- Nose highlight -->
+      <ellipse cx="243" cy="258" rx="8" ry="6" fill="rgba(255,255,255,0.15)" transform="rotate(-15 243 258)"/>
+
+      <!-- Head shine -->
+      <ellipse cx="210" cy="160" rx="40" ry="25" fill="rgba(255,255,255,0.1)" transform="rotate(-20 210 160)"/>
+
+      <!-- Gradients -->
+      <defs>
+        <radialGradient id="headGrad" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#B84EFF"/>
+          <stop offset="60%" stop-color="#9B30FF"/>
+          <stop offset="100%" stop-color="#7B1FCC"/>
+        </radialGradient>
+        <radialGradient id="bodyGrad" cx="40%" cy="30%">
+          <stop offset="0%" stop-color="#9B30FF"/>
+          <stop offset="100%" stop-color="#6B0DAD"/>
+        </radialGradient>
+        <linearGradient id="earGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#9B30FF"/>
+          <stop offset="100%" stop-color="#7B1FCC"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- Logo -->
     <div class="logo">
       <div class="logo-speak">SPEAK</div>
       <div class="logo-up">UP</div>
     </div>
 
+    <!-- Headline -->
     <div class="headline">Tu n'es pas seul(e).</div>
 
-    <div class="cta">
+    <!-- CTA -->
+    <div class="cta-wrap">
       <div class="cta-btn">
         Lien en bio
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -238,8 +281,10 @@
       </div>
       <div class="cta-sub">100% anonyme · 100% gratuit</div>
     </div>
+
   </div>
 
+  <!-- Bottom bar -->
   <div class="bottom-bar">
     <div class="bottom-item"><span class="num">3018</span> Cyber</div>
     <div class="dot-sep"></div>
