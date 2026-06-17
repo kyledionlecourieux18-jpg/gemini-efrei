@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      background: linear-gradient(155deg, #EEF0FF 0%, #FFFBF5 40%, #FFF3E8 100%);
+      position: relative;
+    }
+
+    /* Decorative blobs */
+    .blob-1 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(87,98,213,0.15) 0%, transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
+    .blob-2 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,130,31,0.12) 0%, transparent 70%);
+      bottom: -150px;
+      right: -150px;
+    }
+    .blob-3 {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(87,98,213,0.08) 0%, transparent 70%);
+      bottom: 200px;
+      left: 50px;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 80px 60px;
+    }
+
+    /* Top section */
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(87,98,213,0.15);
+      border-radius: 100px;
+      padding: 10px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #5762D5;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 12px rgba(87,98,213,0.08);
+    }
+
+    .badge svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Logo text */
+    .logo {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .logo-speak {
+      font-size: 110px;
+      font-weight: 900;
+      color: #5762D5;
+      letter-spacing: -3px;
+      text-transform: uppercase;
+    }
+
+    .logo-up {
+      font-size: 110px;
+      font-weight: 900;
+      color: #F5821F;
+      letter-spacing: -3px;
+      text-transform: uppercase;
+      margin-top: -15px;
+    }
+
+    /* Middle */
+    .middle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .headline {
+      font-size: 52px;
+      font-weight: 800;
+      color: #1A1635;
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .headline span {
+      background: linear-gradient(135deg, #5762D5, #F5821F);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin-top: 22px;
+      font-size: 24px;
+      font-weight: 500;
+      color: #6B6580;
+      line-height: 1.5;
+      max-width: 700px;
+    }
+
+    /* Features */
+    .features {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(87,98,213,0.1);
+      border-radius: 100px;
+      padding: 14px 26px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1A1635;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 16px rgba(87,98,213,0.06);
+    }
+
+    .feature-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* Bottom */
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #5762D5, #F5821F);
+      color: white;
+      font-size: 26px;
+      font-weight: 800;
+      padding: 22px 60px;
+      border-radius: 24px;
+      border: none;
+      box-shadow: 0 8px 32px rgba(87,98,213,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    .cta-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .numbers {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-top: 5px;
+    }
+
+    .number-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #6B6580;
+    }
+
+    .number-item strong {
+      font-size: 26px;
+      font-weight: 900;
+      color: #5762D5;
+    }
+
+    .separator {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #D0CDDA;
+    }
+
+    .footer-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #9B95A8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Speech bubble decorations */
+    .bubble-deco {
+      position: absolute;
+      border: 3px solid rgba(87,98,213,0.08);
+      border-radius: 24px;
+      z-index: 0;
+    }
+    .bubble-deco-1 {
+      width: 120px;
+      height: 80px;
+      top: 60px;
+      right: 60px;
+      transform: rotate(12deg);
+    }
+    .bubble-deco-2 {
+      width: 90px;
+      height: 60px;
+      bottom: 120px;
+      left: 40px;
+      transform: rotate(-8deg);
+      border-color: rgba(245,130,31,0.1);
+    }
+    .bubble-deco-3 {
+      width: 70px;
+      height: 50px;
+      top: 350px;
+      right: 30px;
+      transform: rotate(5deg);
+      border-color: rgba(245,130,31,0.08);
+    }
+
+    /* Hearts decoration */
+    .heart-deco {
+      position: absolute;
+      font-size: 36px;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    .heart-1 { top: 180px; right: 90px; transform: rotate(15deg); }
+    .heart-2 { bottom: 280px; left: 60px; transform: rotate(-10deg); font-size: 28px; }
+    .heart-3 { top: 420px; left: 100px; transform: rotate(20deg); font-size: 24px; opacity: 0.1; }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative elements -->
+  <div class="blob-1"></div>
+  <div class="blob-2"></div>
+  <div class="blob-3"></div>
+  <div class="bubble-deco bubble-deco-1"></div>
+  <div class="bubble-deco bubble-deco-2"></div>
+  <div class="bubble-deco bubble-deco-3"></div>
+  <div class="heart-deco heart-1">💜</div>
+  <div class="heart-deco heart-2">🧡</div>
+  <div class="heart-deco heart-3">💙</div>
+
+  <div class="container">
+
+    <!-- TOP -->
+    <div class="top">
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+        </svg>
+        100% anonyme &amp; gratuit
+      </div>
+
+      <div class="logo">
+        <div class="logo-speak">SPEAK</div>
+        <div class="logo-up">UP</div>
+      </div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="middle">
+      <div class="headline">
+        Tu n'es pas seul(e).<br/>
+        <span>Parle. On t'écoute.</span>
+      </div>
+
+      <div class="subtitle">
+        Un compagnon IA bienveillant qui t'aide<br/>
+        face au harcèlement scolaire et en ligne.
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">💜</div>
+          Bienveillant
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          Anonyme
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✨</div>
+          Sans jugement
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="bottom">
+      <div class="cta-btn">
+        Commence à parler maintenant
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </div>
+
+      <div class="numbers">
+        <div class="number-item"><strong>3018</strong> Cyberharcèlement</div>
+        <div class="separator"></div>
+        <div class="number-item"><strong>3020</strong> Harcèlement scolaire</div>
+        <div class="separator"></div>
+        <div class="number-item"><strong>3114</strong> Urgence</div>
+      </div>
+
+      <div class="footer-text">speakup · stop au harcèlement</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
