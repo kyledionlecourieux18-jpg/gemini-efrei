@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1350px;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      background: #0F0A2A;
+      position: relative;
+    }
+
+    /* Geometric diagonal stripes */
+    .geo-stripes {
+      position: absolute;
+      top: 0; right: 0;
+      width: 600px;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0.12;
+    }
+    .stripe {
+      position: absolute;
+      background: linear-gradient(135deg, #7B5FC7, #4A8CC7);
+      transform: rotate(-25deg);
+    }
+    .s1 { width: 120px; height: 1800px; top: -200px; right: 80px; }
+    .s2 { width: 80px; height: 1800px; top: -200px; right: 240px; }
+    .s3 { width: 50px; height: 1800px; top: -200px; right: 360px; opacity: 0.5; }
+
+    /* Compass rose */
+    .compass {
+      position: absolute;
+      top: 280px;
+      right: 60px;
+      width: 200px;
+      height: 200px;
+      opacity: 0.1;
+    }
+
+    /* Triangle shapes */
+    .triangle {
+      position: absolute;
+      width: 0; height: 0;
+      border-style: solid;
+    }
+    .t1 {
+      border-width: 0 80px 140px 80px;
+      border-color: transparent transparent rgba(100,140,200,0.06) transparent;
+      top: 100px; left: 40px;
+    }
+    .t2 {
+      border-width: 100px 60px 0 60px;
+      border-color: rgba(155,48,255,0.05) transparent transparent transparent;
+      bottom: 300px; right: 80px;
+    }
+
+    /* Glow */
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .g1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(90,60,180,0.2) 0%, transparent 65%);
+      top: 150px; left: 50%;
+      transform: translateX(-50%);
+    }
+    .g2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(70,120,200,0.1) 0%, transparent 65%);
+      bottom: 200px; right: -100px;
+    }
+
+    /* Heartbeat line */
+    .heartbeat {
+      position: absolute;
+      top: 400px;
+      right: 50px;
+      opacity: 0.08;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 65px 45px;
+    }
+
+    /* Logo speech bubble */
+    .logo-wrap {
+      position: relative;
+      width: 180px;
+      height: 140px;
+    }
+    .logo-bubble-shape {
+      width: 180px;
+      height: 120px;
+      background: white;
+      border-radius: 22px;
+      border: 5px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      position: relative;
+    }
+    .logo-bubble-shape::after {
+      content: '';
+      position: absolute;
+      bottom: -22px;
+      left: 22px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 22px 18px 0 0;
+      border-color: white transparent transparent transparent;
+      filter: drop-shadow(0 0 0 #1a1a1a);
+    }
+    .logo-bubble-shape::before {
+      content: '';
+      position: absolute;
+      bottom: -28px;
+      left: 18px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 28px 24px 0 0;
+      border-color: #1a1a1a transparent transparent transparent;
+      z-index: -1;
+    }
+    .logo-speak-text {
+      font-size: 38px;
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 0.9;
+      letter-spacing: -1px;
+    }
+    .logo-up-text {
+      font-size: 52px;
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 0.85;
+      letter-spacing: -2px;
+    }
+
+    /* Mascot section */
+    .mascot-section {
+      position: relative;
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mascot {
+      width: 280px;
+      height: 300px;
+      filter: drop-shadow(0 8px 30px rgba(100,0,200,0.3));
+    }
+
+    /* Title */
+    .title-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .title-main {
+      font-size: 88px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      line-height: 1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .title-sub {
+      margin-top: 14px;
+      font-size: 30px;
+      font-weight: 800;
+      color: #A88FD0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.3;
+    }
+
+    /* Message */
+    .message-box {
+      margin-top: 35px;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .message-main {
+      font-size: 26px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Phone numbers */
+    .numbers {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-self: flex-start;
+    }
+    .num-bar {
+      display: flex;
+      align-items: center;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .num-bar-purple {
+      background: #5C2D91;
+      color: white;
+    }
+    .num-bar-blue {
+      background: #3A5FA0;
+      color: white;
+    }
+
+    /* CTA + bottom */
+    .bottom-section {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #4A8CC7;
+      color: white;
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 16px rgba(74,140,199,0.3);
+    }
+
+    .bottom-note {
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      text-align: right;
+      font-style: italic;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background geo elements -->
+  <div class="geo-stripes">
+    <div class="stripe s1"></div>
+    <div class="stripe s2"></div>
+    <div class="stripe s3"></div>
+  </div>
+  <div class="triangle t1"></div>
+  <div class="triangle t2"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+
+  <!-- Compass SVG -->
+  <svg class="compass" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" stroke="white" stroke-width="2"/>
+    <circle cx="100" cy="100" r="60" stroke="white" stroke-width="1"/>
+    <line x1="100" y1="5" x2="100" y2="195" stroke="white" stroke-width="1.5"/>
+    <line x1="5" y1="100" x2="195" y2="100" stroke="white" stroke-width="1.5"/>
+    <line x1="30" y1="30" x2="170" y2="170" stroke="white" stroke-width="0.8"/>
+    <line x1="170" y1="30" x2="30" y2="170" stroke="white" stroke-width="0.8"/>
+    <polygon points="100,10 106,40 100,35 94,40" fill="white"/>
+    <polygon points="100,190 106,160 100,165 94,160" fill="white"/>
+    <polygon points="10,100 40,94 35,100 40,106" fill="white"/>
+    <polygon points="190,100 160,94 165,100 160,106" fill="white"/>
+    <text x="100" y="22" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="Inter">N</text>
+    <text x="100" y="192" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="Inter">S</text>
+    <text x="13" y="104" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="Inter">O</text>
+    <text x="187" y="104" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="Inter">E</text>
+  </svg>
+
+  <!-- Heartbeat line -->
+  <svg class="heartbeat" width="300" height="60" viewBox="0 0 300 60">
+    <polyline points="0,30 60,30 80,10 100,50 120,20 140,40 160,30 300,30"
+      fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <div class="logo-bubble-shape">
+        <div class="logo-speak-text">SPEAK</div>
+        <div class="logo-up-text">UP</div>
+      </div>
+    </div>
+
+    <!-- Mascot -->
+    <div class="mascot-section">
+      <svg class="mascot" viewBox="0 0 500 560" xmlns="http://www.w3.org/2000/svg">
+        <path d="M165 370 C140 390 135 410 148 420" fill="none" stroke="#1a1a1a" stroke-width="10" stroke-linecap="round"/>
+        <path d="M167 368 C142 388 138 408 150 418" fill="none" stroke="#7B20CC" stroke-width="7" stroke-linecap="round"/>
+        <path d="M340 330 C370 290 400 240 410 200 C415 180 420 165 415 155"
+          fill="none" stroke="#1a1a1a" stroke-width="16" stroke-linecap="round"/>
+        <path d="M340 330 C370 290 400 240 410 200 C415 180 420 165 415 155"
+          fill="none" stroke="#9B40E8" stroke-width="10" stroke-linecap="round"/>
+        <path d="M160 310 C150 410 175 510 250 510 C325 510 350 410 340 310"
+          fill="url(#bg)" stroke="#1a1a1a" stroke-width="10"/>
+        <ellipse cx="250" cy="200" rx="135" ry="130" fill="url(#hg)" stroke="#1a1a1a" stroke-width="10"/>
+        <path d="M145 115 L110 25 L195 85" fill="#8B30DD" stroke="#1a1a1a" stroke-width="9" stroke-linejoin="round"/>
+        <path d="M355 115 L390 25 L305 85" fill="#8B30DD" stroke="#1a1a1a" stroke-width="9" stroke-linejoin="round"/>
+        <ellipse cx="200" cy="190" rx="14" ry="28" fill="#1a1a1a" transform="rotate(-10 200 190)"/>
+        <path d="M280 180 Q295 200 310 180" fill="none" stroke="#1a1a1a" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="250" cy="240" rx="24" ry="19" fill="#4A0E80" stroke="#1a1a1a" stroke-width="5"/>
+        <ellipse cx="243" cy="234" rx="7" ry="5" fill="rgba(255,255,255,0.1)" transform="rotate(-15 243 234)"/>
+        <path d="M228 256 Q250 274 272 256" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="210" cy="140" rx="40" ry="22" fill="rgba(255,255,255,0.08)" transform="rotate(-25 210 140)"/>
+        <defs>
+          <radialGradient id="hg" cx="38%" cy="32%">
+            <stop offset="0%" stop-color="#9B40E8"/><stop offset="50%" stop-color="#7B20CC"/><stop offset="100%" stop-color="#5A0A90"/>
+          </radialGradient>
+          <radialGradient id="bg" cx="40%" cy="25%">
+            <stop offset="0%" stop-color="#7B20CC"/><stop offset="100%" stop-color="#4A0870"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Title -->
+    <div class="title-section">
+      <div class="title-main">AGIR<br/>ENSEMBLE</div>
+      <div class="title-sub">Pour un environnement<br/>sans harcèlement</div>
+    </div>
+
+    <!-- Message -->
+    <div class="message-box">
+      <div class="message-main">
+        Ne reste pas seul·e, chers citoyens.<br/>
+        Des solutions concrètes existent.
+      </div>
+    </div>
+
+    <!-- Numbers -->
+    <div class="numbers">
+      <div class="num-bar num-bar-purple">Harcèlement scolaire : 3020</div>
+      <div class="num-bar num-bar-blue">Prévention suicide : 3114</div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="bottom-section">
+      <div class="cta-btn">
+        Visitez le site pour plus<br/>de ressources et d'aide
+      </div>
+      <div class="bottom-note">
+        (Plus de détails<br/>dans le lien de bio)
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
