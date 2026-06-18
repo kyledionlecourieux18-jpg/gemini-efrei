@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      background: #1A0E2E;
+      position: relative;
+    }
+
+    /* Radial rays behind mascot */
+    .rays {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1400px;
+      height: 1400px;
+      background: conic-gradient(
+        from 0deg,
+        rgba(155,48,255,0.08) 0deg,
+        rgba(155,48,255,0) 10deg,
+        rgba(155,48,255,0.08) 20deg,
+        rgba(155,48,255,0) 30deg,
+        rgba(155,48,255,0.08) 40deg,
+        rgba(155,48,255,0) 50deg,
+        rgba(155,48,255,0.08) 60deg,
+        rgba(155,48,255,0) 70deg,
+        rgba(155,48,255,0.08) 80deg,
+        rgba(155,48,255,0) 90deg,
+        rgba(155,48,255,0.08) 100deg,
+        rgba(155,48,255,0) 110deg,
+        rgba(155,48,255,0.08) 120deg,
+        rgba(155,48,255,0) 130deg,
+        rgba(155,48,255,0.08) 140deg,
+        rgba(155,48,255,0) 150deg,
+        rgba(155,48,255,0.08) 160deg,
+        rgba(155,48,255,0) 170deg,
+        rgba(155,48,255,0.08) 180deg,
+        rgba(155,48,255,0) 190deg,
+        rgba(155,48,255,0.08) 200deg,
+        rgba(155,48,255,0) 210deg,
+        rgba(155,48,255,0.08) 220deg,
+        rgba(155,48,255,0) 230deg,
+        rgba(155,48,255,0.08) 240deg,
+        rgba(155,48,255,0) 250deg,
+        rgba(155,48,255,0.08) 260deg,
+        rgba(155,48,255,0) 270deg,
+        rgba(155,48,255,0.08) 280deg,
+        rgba(155,48,255,0) 290deg,
+        rgba(155,48,255,0.08) 300deg,
+        rgba(155,48,255,0) 310deg,
+        rgba(155,48,255,0.08) 320deg,
+        rgba(155,48,255,0) 330deg,
+        rgba(155,48,255,0.08) 340deg,
+        rgba(155,48,255,0) 350deg,
+        rgba(155,48,255,0.08) 360deg
+      );
+      border-radius: 50%;
+    }
+
+    /* Central glow */
+    .center-glow {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(120,60,220,0.35) 0%, rgba(120,60,220,0.1) 40%, transparent 70%);
+    }
+
+    /* Bottom gradient */
+    .bottom-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 500px;
+      background: linear-gradient(to top, #1A0E2E 0%, transparent 100%);
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 70px 40px;
+    }
+
+    /* Mascot circle frame */
+    .mascot-frame {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8B7CC8 0%, #A48FD4 50%, #7B6AB8 100%);
+      border: 6px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 60px rgba(155,48,255,0.4),
+        0 0 120px rgba(155,48,255,0.15);
+    }
+
+    .mascot {
+      width: 300px;
+      height: 320px;
+      margin-top: 40px;
+    }
+
+    /* Main text block */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 40px;
+      gap: 10px;
+    }
+
+    .main-line {
+      font-size: 96px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -2px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .main-line .accent {
+      color: #C88FFF;
+    }
+
+    .divider {
+      width: 100px;
+      height: 5px;
+      background: linear-gradient(90deg, #9B30FF, #C88FFF);
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+
+    .sub-line {
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+    }
+
+    /* Action words */
+    .actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .action-pill {
+      padding: 12px 30px;
+      border: 2px solid rgba(155,48,255,0.5);
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #C88FFF;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: rgba(155,48,255,0.08);
+    }
+
+    /* Bottom section */
+    .bottom {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .bottom-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* SpeakUp logo */
+    .logo-mark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .logo-mark .speak {
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      text-transform: uppercase;
+    }
+    .logo-mark .up {
+      font-size: 22px;
+      font-weight: 900;
+      color: #F5821F;
+      text-transform: uppercase;
+    }
+
+    .sep-line {
+      width: 2px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .handle {
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .bottom-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #9B30FF;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 4px 24px rgba(155,48,255,0.4);
+    }
+    .cta-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: white;
+      fill: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rays"></div>
+  <div class="center-glow"></div>
+  <div class="bottom-fade"></div>
+
+  <div class="container">
+
+    <!-- Mascot in circle frame -->
+    <div class="mascot-frame">
+      <svg class="mascot" viewBox="0 0 500 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left arm (resting) -->
+        <path d="M165 370 C140 390 135 410 148 420" fill="none" stroke="#1a1a1a" stroke-width="10" stroke-linecap="round"/>
+        <path d="M167 368 C142 388 138 408 150 418" fill="none" stroke="url(#armGrad)" stroke-width="7" stroke-linecap="round"/>
+
+        <!-- Right arm (waving up) -->
+        <path d="M340 330 C370 290 400 240 410 200 C415 180 420 165 415 155"
+          fill="none" stroke="#1a1a1a" stroke-width="16" stroke-linecap="round"/>
+        <path d="M340 330 C370 290 400 240 410 200 C415 180 420 165 415 155"
+          fill="none" stroke="url(#armWaveGrad)" stroke-width="10" stroke-linecap="round"/>
+
+        <!-- Body -->
+        <path d="M160 310 C150 410 175 510 250 510 C325 510 350 410 340 310"
+          fill="url(#bodyGrad)" stroke="#1a1a1a" stroke-width="10"/>
+
+        <!-- Head -->
+        <ellipse cx="250" cy="200" rx="135" ry="130" fill="url(#headGrad)" stroke="#1a1a1a" stroke-width="10"/>
+
+        <!-- Left ear -->
+        <path d="M145 115 L110 25 L195 85" fill="url(#earGrad)" stroke="#1a1a1a" stroke-width="9" stroke-linejoin="round"/>
+
+        <!-- Right ear -->
+        <path d="M355 115 L390 25 L305 85" fill="url(#earGrad2)" stroke="#1a1a1a" stroke-width="9" stroke-linejoin="round"/>
+
+        <!-- Left eye -->
+        <ellipse cx="200" cy="190" rx="14" ry="28" fill="#1a1a1a" transform="rotate(-10 200 190)"/>
+
+        <!-- Right eye (winking/happy) -->
+        <path d="M280 180 Q295 200 310 180" fill="none" stroke="#1a1a1a" stroke-width="7" stroke-linecap="round"/>
+
+        <!-- Nose -->
+        <ellipse cx="250" cy="240" rx="24" ry="19" fill="#4A0E80" stroke="#1a1a1a" stroke-width="5"/>
+        <ellipse cx="243" cy="234" rx="7" ry="5" fill="rgba(255,255,255,0.1)" transform="rotate(-15 243 234)"/>
+
+        <!-- Mouth (happy) -->
+        <path d="M228 260 Q250 278 272 260" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+
+        <!-- Head shine -->
+        <ellipse cx="210" cy="140" rx="40" ry="22" fill="rgba(255,255,255,0.08)" transform="rotate(-25 210 140)"/>
+
+        <defs>
+          <radialGradient id="headGrad" cx="38%" cy="32%">
+            <stop offset="0%" stop-color="#9B40E8"/>
+            <stop offset="50%" stop-color="#7B20CC"/>
+            <stop offset="100%" stop-color="#5A0A90"/>
+          </radialGradient>
+          <radialGradient id="bodyGrad" cx="40%" cy="25%">
+            <stop offset="0%" stop-color="#7B20CC"/>
+            <stop offset="100%" stop-color="#4A0870"/>
+          </radialGradient>
+          <linearGradient id="earGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8B30DD"/>
+            <stop offset="100%" stop-color="#5A0A90"/>
+          </linearGradient>
+          <linearGradient id="earGrad2" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8B30DD"/>
+            <stop offset="100%" stop-color="#6B15AA"/>
+          </linearGradient>
+          <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7B20CC"/>
+            <stop offset="100%" stop-color="#5A0A90"/>
+          </linearGradient>
+          <linearGradient id="armWaveGrad" x1="0" y1="1" x2="0.5" y2="0">
+            <stop offset="0%" stop-color="#7B20CC"/>
+            <stop offset="100%" stop-color="#9B40E8"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Text -->
+    <div class="text-block">
+      <div class="main-line">TA <span class="accent">VOIX</span></div>
+      <div class="main-line">COMPTE.</div>
+      <div class="divider"></div>
+      <div class="sub-line">parle · on t'écoute</div>
+    </div>
+
+    <!-- Action pills -->
+    <div class="actions">
+      <div class="action-pill">3018</div>
+      <div class="action-pill">3020</div>
+      <div class="action-pill">3114</div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="bottom">
+      <div class="bottom-left">
+        <div class="logo-mark">
+          <span class="speak">Speak</span>
+          <span class="up">Up</span>
+        </div>
+        <div class="sep-line"></div>
+        <div class="handle">@speakup_off</div>
+      </div>
+      <div class="bottom-right">
+        <div class="cta-btn">
+          Lien en bio
+          <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
