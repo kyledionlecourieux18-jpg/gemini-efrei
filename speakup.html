@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Stop au Harcèlement — SpeakUp</title>
+<meta name="description" content="Tu n'es plus seul. Parle avec SpeakUp, un compagnon IA bienveillant qui t'aide face au harcèlement."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset & base ─────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;background:#FDFAF3;color:#1A1635}
+
+/* ── Variables ────────────────────────────── */
+:root{
+  --primary:#5762D5;--primary-light:#EEF0FF;
+  --accent:#F5821F;--accent-light:#FFF3E8;
+  --bg:#FDFAF3;--fg:#1A1635;
+  --card:#FFFFFF;--secondary:#F0EBE0;
+  --muted:#7A7590;--border:#DDD7CC;
+  --radius:16px;
+  --gradient:linear-gradient(135deg,#5762D5,#F5821F);
+  --shadow-glow:0 0 24px rgba(87,98,213,.25);
+  --shadow-card:0 4px 24px rgba(87,98,213,.08);
+}
+
+/* ── Scrollbar ────────────────────────────── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#C5BFD6;border-radius:999px}
+
+/* ── Hero ─────────────────────────────────── */
+.hero{position:relative;overflow:hidden;padding:56px 20px 64px;background:linear-gradient(155deg,#EEF0FF 0%,#FDFAF3 45%,#FFF3E8 100%)}
+@media(min-width:640px){.hero{padding:80px 32px 64px}}
+.hero-blob{position:absolute;border-radius:50%;pointer-events:none}
+.hero-blob-1{width:224px;height:224px;top:64px;left:-48px;background:rgba(87,98,213,.12);filter:blur(48px)}
+.hero-blob-2{width:256px;height:256px;top:128px;right:0;background:rgba(245,130,31,.12);filter:blur(48px)}
+.hero-inner{position:relative;max-width:576px;margin:0 auto}
+
+.trust-badge{display:inline-flex;align-items:center;gap:8px;border-radius:100px;border:1px solid var(--border);background:rgba(255,255,255,.8);padding:6px 12px;font-size:12px;font-weight:600;color:var(--muted);backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.trust-badge svg{width:14px;height:14px;color:var(--primary)}
+
+h1{margin-top:24px;font-size:36px;font-weight:800;line-height:1.1;letter-spacing:-.5px}
+@media(min-width:640px){h1{font-size:48px}}
+.text-gradient{display:block;margin-top:8px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero p{margin-top:20px;font-size:16px;line-height:1.6;color:var(--muted)}
+@media(min-width:640px){.hero p{font-size:18px}}
+.hero p strong{font-weight:700;color:var(--fg)}
+
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:32px;padding:16px 24px;border-radius:16px;background:var(--gradient);color:#fff;font-size:16px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(87,98,213,.35);transition:all .2s;border:none;cursor:pointer;width:100%}
+@media(min-width:640px){.btn-primary{width:auto}}
+.btn-primary:hover{box-shadow:0 6px 28px rgba(87,98,213,.45);transform:translateY(-1px)}
+.btn-primary:active{transform:scale(.97)}
+.btn-primary svg{width:20px;height:20px}
+
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+.feature-pill{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.7);text-align:center;backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.feature-pill svg{width:20px;height:20px;color:var(--primary)}
+.feature-pill span{font-size:12px;font-weight:600;color:var(--muted)}
+
+/* ── Chat ─────────────────────────────────── */
+.chat-section{padding:40px 16px 64px}
+@media(min-width:640px){.chat-section{padding:40px 32px 64px}}
+.chat-wrap{max-width:672px;margin:0 auto}
+.chat-card{border-radius:24px;border:1px solid var(--border);background:#fff;box-shadow:var(--shadow-card);overflow:hidden}
+
+.chat-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid rgba(221,215,204,.6)}
+.chat-header-left{display:flex;align-items:center;gap:12px}
+.avatar{display:grid;place-items:center;border-radius:50%;background:var(--gradient);color:#fff;flex-shrink:0}
+.avatar-lg{width:36px;height:36px}.avatar-lg svg{width:20px;height:20px}
+.avatar-sm{width:28px;height:28px}.avatar-sm svg{width:16px;height:16px}
+.chat-name{font-size:14px;font-weight:700;color:var(--fg)}
+.chat-status{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.btn-reset{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;border:1px solid var(--border);background:rgba(240,235,224,.6);font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s}
+.btn-reset:hover{border-color:rgba(87,98,213,.4);color:var(--fg)}
+.btn-reset svg{width:14px;height:14px}
+
+/* Messages */
+.messages{height:480px;overflow-y:auto;padding:20px 16px;display:flex;flex-direction:column;gap:16px}
+@media(min-width:640px){.messages{padding:20px}}
+.msg-row{display:flex;gap:8px;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg-row.user{justify-content:flex-end}
+.msg-row.bot{justify-content:flex-start}
+
+.bubble{max-width:80%;padding:10px 16px;font-size:14px;line-height:1.6;white-space:pre-wrap}
+.bubble-bot{border-radius:16px 16px 16px 6px;border:1px solid var(--border);background:#fff;color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.bubble-user{border-radius:16px 16px 6px 16px;background:linear-gradient(135deg,#5762D5,#6B6FE0);color:#fff;box-shadow:0 2px 12px rgba(87,98,213,.25)}
+.bubble strong{font-weight:700}
+
+/* Typing dots */
+.typing{display:flex;align-items:center;gap:4px;padding:12px 16px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--primary);animation:bounce 1.2s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+
+/* Quick replies */
+.quick-replies{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid rgba(221,215,204,.5);background:rgba(240,235,224,.2)}
+.quick-btn{padding:6px 12px;border-radius:100px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:500;color:rgba(26,22,53,.8);cursor:pointer;transition:all .15s}
+.quick-btn:hover{border-color:rgba(87,98,213,.5);background:rgba(87,98,213,.05);color:var(--fg)}
+.quick-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* Input */
+.chat-input{display:flex;align-items:flex-end;gap:8px;padding:12px;border-top:1px solid rgba(221,215,204,.5);background:#fff}
+.chat-input textarea{flex:1;resize:none;max-height:128px;padding:12px 16px;border-radius:16px;border:1px solid var(--border);background:rgba(240,235,224,.3);font-size:14px;line-height:1.6;color:var(--fg);font-family:'Inter',sans-serif;outline:none;transition:all .15s}
+.chat-input textarea::placeholder{color:var(--muted)}
+.chat-input textarea:focus{border-color:rgba(87,98,213,.5);background:#fff}
+.chat-input textarea:disabled{opacity:.5}
+.btn-send{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:16px;background:var(--gradient);color:#fff;border:none;cursor:pointer;box-shadow:var(--shadow-glow);transition:all .15s}
+.btn-send:active{transform:scale(.95)}
+.btn-send:disabled{opacity:.4;cursor:not-allowed}
+.btn-send svg{width:20px;height:20px}
+
+/* ── Resources ────────────────────────────── */
+.resources-section{padding:0 16px 80px}
+@media(min-width:640px){.resources-section{padding:0 32px 80px}}
+.resources-card{max-width:672px;margin:0 auto;border-radius:24px;border:1px solid var(--border);background:#fff;box-shadow:var(--shadow-card);padding:24px}
+@media(min-width:640px){.resources-card{padding:32px}}
+
+.section-badge{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:100px;background:var(--gradient);color:#fff;font-size:12px;font-weight:700}
+.section-badge svg{width:14px;height:14px}
+
+.resources-card h3{margin-top:16px;font-size:20px;font-weight:800;color:var(--fg)}
+.resources-card>p{margin-top:4px;font-size:14px;color:var(--muted)}
+
+.phone-list{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.phone-card{display:flex;align-items:center;gap:16px;padding:16px;border-radius:16px;border:1px solid var(--border);text-decoration:none;transition:all .15s}
+.phone-card:hover{box-shadow:var(--shadow-card)}
+.phone-card.featured{border-color:rgba(87,98,213,.4);background:rgba(87,98,213,.05);box-shadow:var(--shadow-glow)}
+.phone-card:not(.featured){background:rgba(240,235,224,.4)}
+.phone-card:not(.featured):hover{border-color:rgba(87,98,213,.4);background:#fff}
+.phone-icon{width:48px;height:48px;flex-shrink:0;display:grid;place-items:center;border-radius:16px;background:var(--gradient);color:#fff}
+.phone-icon svg{width:20px;height:20px}
+.phone-num{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--fg)}
+.phone-badge{display:inline-block;padding:2px 8px;border-radius:100px;background:var(--gradient);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;margin-left:8px}
+.phone-desc{font-size:12px;color:var(--muted)}
+
+.school-divider{display:flex;align-items:center;gap:8px;margin:24px 0 12px}
+.school-divider .line{flex:1;height:1px;background:var(--border)}
+.school-divider span{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--primary)}
+
+.school-list{display:flex;flex-direction:column;gap:12px}
+.school-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.6);transition:all .15s}
+.school-card:hover{border-color:rgba(87,98,213,.3);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.school-icon{width:40px;height:40px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;background:rgba(87,98,213,.1);color:var(--primary)}
+.school-icon svg{width:20px;height:20px}
+.school-title{font-size:14px;font-weight:600;color:var(--fg)}
+.school-desc{font-size:12px;line-height:1.5;color:var(--muted)}
+
+/* ── Footer ───────────────────────────────── */
+footer{border-top:1px solid rgba(221,215,204,.5);background:rgba(255,255,255,.6);padding:32px 20px;text-align:center;font-size:12px;color:var(--muted)}
+footer p:first-child{font-weight:600;color:var(--fg)}
+footer p:last-child{margin-top:4px}
+footer strong{color:var(--fg)}
+</style>
+</head>
+<body>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-inner">
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+      SpeakUp · Bienveillant &amp; confidentiel
+    </div>
+    <h1>Tu n'es plus seul.<span class="text-gradient">Parle. Je t'écoute.</span></h1>
+    <p>Discute avec <strong>SpeakUp</strong>, un compagnon IA bienveillant. Que tu sois victime ou témoin, il t'écoute et t'aide à passer à l'action — pas à pas.</p>
+    <a href="#chat" class="btn-primary">
+      Commencer à parler
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    <div class="features">
+      <div class="feature-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
+        <span>Bienveillant</span>
+      </div>
+      <div class="feature-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        <span>Anonyme</span>
+      </div>
+      <div class="feature-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>
+        <span>Sans jugement</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CHAT ══════ -->
+<section id="chat" class="chat-section">
+  <div class="chat-wrap">
+    <div class="chat-card">
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="avatar avatar-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></div>
+          <div>
+            <div class="chat-name">SpeakUp</div>
+            <div class="chat-status"><span class="status-dot"></span> En ligne · anonyme</div>
+          </div>
+        </div>
+        <button class="btn-reset" onclick="resetChat()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Nouveau
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages" id="messages"></div>
+
+      <!-- Quick replies -->
+      <div class="quick-replies" id="quickReplies">
+        <button class="quick-btn" onclick="send(this.textContent)">😔 Je me fais harceler au lycée…</button>
+        <button class="quick-btn" onclick="send(this.textContent)">😡 Quelqu'un poste des trucs méchants sur moi</button>
+        <button class="quick-btn" onclick="send(this.textContent)">😰 Je suis témoin et je sais pas quoi faire</button>
+        <button class="quick-btn" onclick="send(this.textContent)">😶 J'ai trop peur d'en parler à mes parents</button>
+      </div>
+
+      <!-- Input -->
+      <form class="chat-input" onsubmit="event.preventDefault();send(ta.value)">
+        <textarea id="ta" rows="1" placeholder="Écris ce que tu ressens…" oninput="autoResize(this);toggleSend()"></textarea>
+        <button type="submit" class="btn-send" id="sendBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ RESOURCES ══════ -->
+<section class="resources-section">
+  <div class="resources-card">
+    <div class="section-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+      De l'aide tout de suite
+    </div>
+    <h3>Des numéros gratuits et anonymes</h3>
+    <p>Tu peux appeler même si tu n'es pas sûr(e) — ils sont là pour ça.</p>
+
+    <div class="phone-list">
+      <a href="tel:3018" class="phone-card featured">
+        <div class="phone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg></div>
+        <div><div><span class="phone-num">3018</span><span class="phone-badge">Recommandé</span></div><div class="phone-desc">Cyberharcèlement · gratuit · 7j/7 · appel ou tchat</div></div>
+      </a>
+      <a href="tel:3020" class="phone-card">
+        <div class="phone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg></div>
+        <div><div><span class="phone-num">3020</span></div><div class="phone-desc">Harcèlement scolaire · gratuit · lundi → samedi</div></div>
+      </a>
+      <a href="tel:3114" class="phone-card">
+        <div class="phone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg></div>
+        <div><div><span class="phone-num">3114</span></div><div class="phone-desc">Prévention du suicide · 24h/24 · 7j/7</div></div>
+      </a>
+    </div>
+
+    <div class="school-divider"><div class="line"></div><span>Au lycée, frappe à ces portes</span><div class="line"></div></div>
+
+    <div class="school-list">
+      <div class="school-card">
+        <div class="school-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M18 5v16"/><path d="m4 6 7.106-3.79a2 2 0 0 1 1.788 0L20 6"/><path d="m6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11"/><path d="M6 5v16"/><circle cx="12" cy="9" r="2"/></svg></div>
+        <div><div class="school-title">Le CPE</div><div class="school-desc">Signaler, organiser ta protection, adapter ton emploi du temps.</div></div>
+      </div>
+      <div class="school-card">
+        <div class="school-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg></div>
+        <div><div class="school-title">L'infirmière scolaire</div><div class="school-desc">Parler en toute confidentialité, sans que personne d'autre ne sache.</div></div>
+      </div>
+      <div class="school-card">
+        <div class="school-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></div>
+        <div><div class="school-title">Un prof avec qui tu te sens à l'aise</div><div class="school-desc">Celui ou celle dont tu te dis « lui/elle, je peux ». Fais-toi confiance.</div></div>
+      </div>
+      <div class="school-card">
+        <div class="school-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div><div class="school-title">Les Ambassadeurs pHARe</div><div class="school-desc">Des élèves formés contre le harcèlement, présents dans ton lycée.</div></div>
+      </div>
+      <div class="school-card">
+        <div class="school-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div><div class="school-title">Tu es témoin ?</div><div class="school-desc">Ne ris pas, ne filme pas. Parle à la victime, et préviens un adulte.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <p>SpeakUp · Stop au Harcèlement</p>
+  <p>En cas de danger immédiat, appelle le <strong>17</strong> ou le <strong>112</strong>.</p>
+</footer>
+
+<!-- ══════ JAVASCRIPT ══════ -->
+<script>
+// ─── CONFIG ──────────────────────────────────
+// Mets ta clé API Gemini ici :
+const API_KEY = '';  // ← COLLE TA CLÉ ICI
+
+const SYSTEM = `Tu es SpeakUp, un compagnon IA bienveillant pour les jeunes victimes ou témoins de harcèlement scolaire et de cyberharcèlement.
+Tu es empathique, doux, non-jugeant. Tu utilises un langage simple, naturel et accessible pour les adolescents.
+Tu écoutes d'abord, puis tu orientes progressivement vers les ressources adaptées : 3018 (cyberharcèlement), 3020 (harcèlement scolaire), 3114 (prévention suicide).
+Tu ne donnes jamais de leçons. Tu valides les émotions. Tu poses des questions ouvertes. Tes réponses font 2-4 phrases max.
+Si la personne est en danger immédiat, invite-la à appeler le 17 ou le 112.`;
+
+const WELCOME = "Hey 💜 Je suis **SpeakUp**. Ici, c'est un espace safe : ni jugement, ni leçon, juste de l'écoute.\n\nRaconte-moi ce qui se passe — avec tes mots, sans pression. Je suis là.";
+
+const AVATAR_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
+
+// ─── STATE ───────────────────────────────────
+let history = [];
+let loading = false;
+const msgEl = document.getElementById('messages');
+const ta = document.getElementById('ta');
+
+// ─── INIT ────────────────────────────────────
+addMsg('bot', WELCOME);
+
+// ─── RENDER ──────────────────────────────────
+function addMsg(role, text) {
+  const row = document.createElement('div');
+  row.className = 'msg-row ' + role;
+  let html = '';
+  if (role === 'bot') html += '<div class="avatar avatar-sm">' + AVATAR_SVG + '</div>';
+  const rendered = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  html += '<div class="bubble bubble-' + role + '">' + rendered + '</div>';
+  row.innerHTML = html;
+  msgEl.appendChild(row);
+  msgEl.scrollTop = msgEl.scrollHeight;
+}
+
+function showTyping() {
+  const row = document.createElement('div');
+  row.className = 'msg-row bot';
+  row.id = 'typing';
+  row.innerHTML = '<div class="avatar avatar-sm">' + AVATAR_SVG + '</div><div class="bubble bubble-bot typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+  msgEl.appendChild(row);
+  msgEl.scrollTop = msgEl.scrollHeight;
+}
+
+function hideTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function setLoading(v) {
+  loading = v;
+  document.querySelectorAll('.quick-btn').forEach(b => b.disabled = v);
+  ta.disabled = v;
+  toggleSend();
+}
+
+// ─── SEND ────────────────────────────────────
+async function send(text) {
+  if (!text || !text.trim() || loading) return;
+  text = text.trim();
+  ta.value = '';
+  ta.style.height = 'auto';
+  toggleSend();
+
+  addMsg('user', text);
+  history.push({ role: 'user', parts: [{ text }] });
+  setLoading(true);
+  showTyping();
+
+  try {
+    if (!API_KEY) throw new Error('no key');
+    const res = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + API_KEY,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM }] },
+          contents: history
+        })
+      }
+    );
+    const data = await res.json();
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Je t'entends. Dis-m'en plus, je suis là. 💜";
+    history.push({ role: 'model', parts: [{ text: reply }] });
+    hideTyping();
+    addMsg('bot', reply);
+  } catch {
+    hideTyping();
+    addMsg('bot', "Je t'entends. Dis-m'en plus, je suis là pour toi. 💜");
+  }
+  setLoading(false);
+}
+
+function resetChat() {
+  history = [];
+  msgEl.innerHTML = '';
+  addMsg('bot', WELCOME);
+}
+
+// ─── UTILS ───────────────────────────────────
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 128) + 'px';
+}
+
+function toggleSend() {
+  document.getElementById('sendBtn').disabled = !ta.value.trim() || loading;
+}
+
+ta.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    send(ta.value);
+  }
+});
+</script>
+</body>
+</html>
